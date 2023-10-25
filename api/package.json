@@ -1,0 +1,16 @@
+{
+  "name": "opjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Wallace Vieira <wallaceofc@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  }
+}
