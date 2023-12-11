@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "start": "node dist",
     "dev": "nodemon src/index.ts"
   },
   "devDependencies": {
