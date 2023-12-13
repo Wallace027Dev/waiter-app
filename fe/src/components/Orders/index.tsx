@@ -6,7 +6,7 @@ const orders: Order[] = [
   {
 		"_id": "6570f8ca2ae073e4d681f593",
 		"table": "3",
-		"status": "WAITING",
+		"status": "IN_PRODUCTION",
 		"products": [
 			{
 				"product": {
