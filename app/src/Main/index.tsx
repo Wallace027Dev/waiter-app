@@ -2,8 +2,9 @@ import { Button } from '../components/Button';
 import { Categories } from '../components/Categories';
 import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
+import { TableModal } from '../components/TableModal';
 
-import { Container, CategoriesContainer, MenuContainer, Footer } from './styles';
+import { Container, CategoriesContainer, MenuContainer, Footer, FooterContiner } from './styles';
 
 export function Main() {
 	return(
@@ -22,9 +23,13 @@ export function Main() {
 			</Container>
 
 			<Footer>
-				<Button onPress={() => alert('novo pedido')}>
+				<FooterContiner>
+					<Button onPress={() => alert('novo pedido')}>
 					Novo Pedido
-				</Button>
+					</Button>
+				</FooterContiner>
+
+				<TableModal />
 			</Footer>
 		</>
 	);

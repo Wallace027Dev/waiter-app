@@ -21,8 +21,8 @@ export function Categories() {
 			data={categories}
 			showsHorizontalScrollIndicator={false}
 			contentContainerStyle={{ paddingRight: 24 }}
-			keyExtractor={category => category._id}
-			renderItem={({ item: category}) => {
+			keyExtractor={(category) => category._id}
+			renderItem={({ item: category }) => {
 				const isSelected = selectedCategory === category._id;
 
 				return (
