@@ -116,24 +116,29 @@ export const Actions = styled.footer`
   flex-direction: column;
   margin-top: 32px;
 
-.primary {
-  border-radius: 48px;
-  background: #333;
-  border: 0;
-  color: #fff;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-.secondary {
-  background: transparent;
-  border: 0;
-  color: #d73035;
-  font-weight: bold;
-  padding: 12px 24px;
-  margin-top: 12px;
-}
+  .primary {
+    border-radius: 48px;
+    background: #333;
+    border: 0;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .secondary {
+    background: transparent;
+    border: 0;
+    color: #d73035;
+    font-weight: bold;
+    padding: 12px 24px;
+    margin-top: 12px;
+  }
 `;
