@@ -1,4 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+
+import {
+	Container,
+	CategoriesContainer,
+	MenuContainer,
+	Footer,
+	CenteredContainer
+} from './styles';
+
+import { CartItem } from '../types/CartItem';
+import { Product } from '../types/Product';
+import { Category } from '../types/Category';
 
 import { Button } from '../components/Button';
 import { Categories } from '../components/Categories';
@@ -6,30 +19,30 @@ import { Header } from '../components/Header';
 import { Menu } from '../components/Menu';
 import { TableModal } from '../components/TableModal';
 import { Cart } from '../components/Cart';
-
-import { products as mockProducts } from '../mocks/products';
-
-import {
-	Container,
-	CategoriesContainer,
-	MenuContainer,
-	Footer,
-	FooterContiner,
-	CenteredContainer
-} from './styles';
-
-import { CartItem } from '../types/CartItem';
-import { Product } from '../types/Product';
-import { ActivityIndicator } from 'react-native';
 import { Empty } from '../components/Icons/Empty';
 import { Text } from '../components/Text';
 
+import { api } from '../utils/api';
+
 export function Main() {
-	const [isLoading, setIsLoading] = useState(false);
-	const [products, setProducts] = useState<Product[]>(mockProducts);
+	const [isLoading, setIsLoading] = useState(true);
+	const [products, setProducts] = useState<Product[]>([]);
+	const [categories, setCategories] = useState<Category[]>([]);
 	const [isTableModalVisible, setIsTableModalVisible] = useState(false);
 	const [selectedTable, setSelectTable] = useState('');
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+	useEffect(() => {
+		Promise.all([
+			api.get('/categories'),
+			api.get('/products'),
+		]).then(([categoriesResponse, productsResponse]) => {
+			setCategories(categoriesResponse.data);
+			setProducts(productsResponse.data);
+
+			setIsLoading(false);
+		});
+	}, []);
 
 	function handleSaveTable(table: string) {
 		setSelectTable(table);
@@ -110,7 +123,7 @@ export function Main() {
 				{!isLoading && (
 					<>
 						<CategoriesContainer>
-							<Categories />
+							<Categories categories={categories} />
 						</CategoriesContainer>
 
 						{products.length > 0 ? (
@@ -134,7 +147,7 @@ export function Main() {
 			</Container>
 
 			<Footer>
-				{/* <FooterContiner> */}
+				{/* <FooterContainer> */}
 				{!selectedTable && (
 					<Button
 						onPress={() => setIsTableModalVisible(true)}
@@ -152,7 +165,7 @@ export function Main() {
 						onConfirmOrder={handleResetOrder}
 					/>
 				)}
-				{/* </FooterContiner> */}
+				{/* </FooterContainer> */}
 
 				<TableModal
 					visible={isTableModalVisible}
