@@ -1,59 +1,41 @@
+import { useEffect, useState } from "react";
 import { Order } from "../../types/Order";
-import { OrdersBoard } from "../OrdersBoard";
-import { Container } from "./styles";
 
-const orders: Order[] = [
-  {
-		"_id": "6570f8ca2ae073e4d681f593",
-		"table": "3",
-		"status": "IN_PRODUCTION",
-		"products": [
-			{
-				"product": {
-					"name": "Coca Cola",
-					"imagePath": "1701901548572-coca-cola.png",
-					"price": 7,
-				},
-				"quantity": 5,
-				"_id": "6570f8ca2ae073e4d681f594"
-			}
-		],
-	},
-  {
-		"_id": "6570e8ca2ae073e4d681f593",
-		"table": "2",
-		"status": "WAITING",
-		"products": [
-			{
-				"product": {
-					"name": "Coca Cola",
-					"imagePath": "1701901548572-coca-cola.png",
-					"price": 7,
-				},
-				"quantity": 5,
-				"_id": "6570f8ca2ae073e4d681f594"
-			}
-		],
-	}
-]
+import { OrdersBoard } from "../OrdersBoard";
+
+import { Container } from "./styles";
+import { api } from "../../utils/api";
 
 export function Orders() {
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+      api.get('/orders')
+      .then(({ data }) => {
+        setOrders(data);
+      })
+  }, []);
+
+  const waiting = orders.filter((order) => order.status === 'WAITING')
+  const prodution = orders.filter((order) => order.status === 'IN_PRODUCTION')
+  const done = orders.filter((order) => order.status === 'DONE')
+
   return (
     <Container>
       <OrdersBoard
         icon="🕒"
         title="Fila de espera"
-        orders={orders}
+        orders={waiting}
       />
       <OrdersBoard
         icon="🕒"
         title="Preparação"
-        orders={[]}
+        orders={prodution}
       />
       <OrdersBoard
         icon="✅"
         title="Pronto"
-        orders={[]}
+        orders={done}
       />
 
     </Container>
