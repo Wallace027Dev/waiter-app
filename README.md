@@ -26,24 +26,17 @@ Frontend (Interface Web - Painel do Restaurante)
     WebSocket: Protocolo para comunicação bidirecional em tempo real entre o cliente e o servidor.
 
 <h2>🔧 Instalação e Execução</h2>
-Backend
 
     Clone o repositório:
-
-bash
 
 <code>git clone https://github.com/seu-username/waiterapp.git</code>
 
     Instale as dependências:
 
-bash
-
 <code>cd waiterapp/backend</code>
 <code>npm install</code>
 
     Inicie o servidor:
-
-css
 
 <code>npm start</code>
 
@@ -51,25 +44,17 @@ Frontend (Aplicativo do Cliente)
 
     Instale o Expo globalmente (se ainda não o tiver):
 
-css
-
 <code>npm install -g expo-cli</code>
 
     Navegue até o diretório do cliente:
-
-bash
 
 <code>cd ../frontend-client</code>
 
     Instale as dependências:
 
-css
-
 <code>npm install</code>
 
     Inicie o aplicativo:
-
-css
 
 <code>npm start</code>
 
@@ -77,19 +62,13 @@ Frontend (Interface Web - Painel do Restaurante)
 
     Navegue até o diretório da interface web:
 
-bash
-
 <code>cd ../frontend-restaurant</code>
 
     Instale as dependências:
 
-css
-
 <code>npm install</code>
 
     Inicie o servidor de desenvolvimento:
-
-css
 
 <code>npm start</code>
 
@@ -99,8 +78,6 @@ Para acessar o aplicativo, você pode baixá-lo na loja de aplicativos do seu di
 <h2>💻 Acesso à Interface Web</h2>
 
 Para acessar a interface web do painel do restaurante, abra seu navegador e vá para o seguinte endereço:
-
-bash
 
 <code>http://localhost:3000</code>
 
