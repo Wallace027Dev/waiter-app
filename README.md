@@ -29,16 +29,16 @@ Frontend (Interface Web - Painel do Restaurante)
 
     Clone o repositório:
 
-<code>git clone https://github.com/seu-username/waiterapp.git</code>
+<code>git clone https://github.com/Wallace027Dev/waiterapp.git</code>
 
     Instale as dependências:
 
-<code>cd waiterapp/backend</code>
+<code>cd waiterapp/api</code>
 <code>npm install</code>
 
     Inicie o servidor:
 
-<code>npm start</code>
+<code>npm run build; npm run start</code>
 
 Frontend (Aplicativo do Cliente)
 
@@ -48,7 +48,7 @@ Frontend (Aplicativo do Cliente)
 
     Navegue até o diretório do cliente:
 
-<code>cd ../frontend-client</code>
+<code>cd ../app</code>
 
     Instale as dependências:
 
@@ -56,13 +56,13 @@ Frontend (Aplicativo do Cliente)
 
     Inicie o aplicativo:
 
-<code>npm start</code>
+<code>npm run start</code>
 
 Frontend (Interface Web - Painel do Restaurante)
 
     Navegue até o diretório da interface web:
 
-<code>cd ../frontend-restaurant</code>
+<code>cd ../fe</code>
 
     Instale as dependências:
 
@@ -70,7 +70,7 @@ Frontend (Interface Web - Painel do Restaurante)
 
     Inicie o servidor de desenvolvimento:
 
-<code>npm start</code>
+<code>npm run build</code>
 
 <h2>📱 Acesso ao Aplicativo</h2>
 
