@@ -38,7 +38,7 @@ Frontend (Interface Web - Painel do Restaurante)
 
     Inicie o servidor:
 
-<code>npm run build; npm run start</code>
+<code>npm run build</code> <code>npm run start</code>
 
 Frontend (Aplicativo do Cliente)
 
@@ -90,10 +90,7 @@ Contribuições são bem-vindas! Siga estas etapas para contribuir para o projet
     Faça commit das suas alterações (<code>git commit -am 'Adicione sua feature'</code>).
     Faça push para a branch (<code>git push origin feature/NomeDaSuaFeature</code>).
     Abra um Pull Request.
-
-<h2>📝 Licença</h2>
-
-Este projeto está licenciado sob a [Nome da Licença]. Consulte o arquivo LICENSE para obter mais detalhes.
+    
 <h2>👨‍💻 Autor</h2>
 
 Desenvolvido por Wallace Vieira.
