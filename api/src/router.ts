@@ -22,12 +22,13 @@ const upload = multer({
     filename(req, file, callback) {
       callback(null, `${Date.now()}-${file.originalname}`);
     },
-  })
+  }),
 });
+
+router.get('/', (req, res) => res.send('Hello World!\nVisit http://localhost:3001/api-docs'));
 
 router.get('/categories', listCategories);
 router.post('/categories', createCategorie);
-
 
 router.get('/products', listProducts);
 router.post('/products', upload.single('image'), createProduct);

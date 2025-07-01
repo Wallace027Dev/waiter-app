@@ -1,23 +1,41 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'node:path';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 import { router } from './router';
+import { Express } from 'express';
 
+interface SwaggerSetup {
+  (app: Express): void;
+}
 
-mongoose.connect('mongodb://localhost:27017')
+const setupSwagger: SwaggerSetup = (app: Express): void => {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+};
+
+mongoose
+  .connect(
+    'mongodb+srv://wawaagp:Es9r2BmlRRlyewcI@waiterapp.n08ezge.mongodb.net'
+  )
   .then(() => {
     const app = express();
     const port = 3001;
 
-    app.use((req, res, next) => {
+    setupSwagger(app);
+
+    app.use((_req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Allow-Methods', '*');
       res.setHeader('Access-Control-Allow-Headers', '*');
 
       next();
     });
-    app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
+    app.use(
+      '/uploads',
+      express.static(path.resolve(__dirname, '..', 'uploads'))
+    );
     app.use(express.json());
     app.use(router);
 
@@ -26,4 +44,3 @@ mongoose.connect('mongodb://localhost:27017')
     });
   })
   .catch(() => console.log('Erro ao conectar ao mongo'));
-
