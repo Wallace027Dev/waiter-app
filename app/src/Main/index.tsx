@@ -38,10 +38,14 @@ export function Main() {
 			api.get('/categories'),
 			api.get('/products'),
 		]).then(([categoriesResponse, productsResponse]) => {
+			console.log('Categorias recebidas:', categoriesResponse.data);
+			console.log('Produtos recebidos:', productsResponse.data);
+
 			setCategories(categoriesResponse.data);
 			setProducts(productsResponse.data);
-
 			setIsLoading(false);
+		}).catch((error) => {
+			console.error('Erro ao buscar dados da API:', error);
 		});
 	}, []);
 
@@ -51,9 +55,14 @@ export function Main() {
 			: `/categories/${categoryId}/products`;
 
 		setIsLoadingProducts(true);
-		const { data } = await api.get(route);
+		try {
+			const { data } = await api.get(route);
+			console.log(`Produtos da categoria ${categoryId}:`, data);
 
-		setProducts(data);
+			setProducts(data);
+		} catch (error) {
+			console.error('Erro ao buscar produtos por categoria:', error);
+		}
 		setIsLoadingProducts(false);
 	}
 

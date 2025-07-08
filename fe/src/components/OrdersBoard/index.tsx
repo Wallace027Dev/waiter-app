@@ -76,7 +76,7 @@ export function OrdersBoard({
       <header>
         <span>{icon}</span>
         <strong>{title}</strong>
-        <span>(1)</span>
+        <span>({orders.length})</span>
       </header>
 
       {orders.length > 0 && (
