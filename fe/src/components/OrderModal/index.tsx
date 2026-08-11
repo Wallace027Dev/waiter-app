@@ -6,6 +6,7 @@ import closeIcon from "../../assets/images/close-icon.svg";
 import { Order } from "../../types/Order";
 
 import { formatCurrency } from "../../utils/formatCurrency";
+import { API_URL } from "../../utils/api";
 
 interface OrderModalProps {
   visible: boolean;
@@ -77,7 +78,7 @@ export function OrderModal({
             {order.products.map(({ _id, product, quantity }) => (
               <div className="item" key={_id}>
                 <img
-                  src={`http://localhost:3001/uploads/${product.imagePath}`}
+                  src={`${API_URL}/uploads/${product.imagePath}`}
                   alt={product.name}
                   width="56"
                   height="28.5"

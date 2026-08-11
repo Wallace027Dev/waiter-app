@@ -15,6 +15,7 @@ import { Image,
 } from './styles';
 import { Close } from '../Icons/Close';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { API_URL } from '../../utils/api';
 import { Button } from '../Button';
 
 interface ProductModalProps {
@@ -43,7 +44,7 @@ export function ProductModal({ visible, product, onClose, onAddToCart }: Product
 		>
 			<Image
 				source={{
-					uri: `http://192.168.18.199:3001/uploads/${product.imagePath}`
+					uri: `${API_URL}/uploads/${product.imagePath}`
 				}}
 			>
 				<CloseButton onPress={onClose}>

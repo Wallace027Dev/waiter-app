@@ -13,6 +13,7 @@ import {
 } from './styles';
 
 import { formatCurrency } from '../../utils/formatCurrency';
+import { API_URL } from '../../utils/api';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { ProductModal } from '../ProductModal';
 
@@ -49,7 +50,7 @@ export function Menu({ onAddToCart, products }: MenuProps) {
 					<ProductContainer onPress={() => handleOpenModal(product)}>
 						<ProductImage
 							source={{
-								uri: `http://192.168.18.199:3001/uploads/${product.imagePath}`,
+								uri: `${API_URL}/uploads/${product.imagePath}`,
 							}} />
 
 						<ProductDetails>

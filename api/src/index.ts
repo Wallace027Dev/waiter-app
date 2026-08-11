@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'node:path';
@@ -15,13 +16,20 @@ const setupSwagger: SwaggerSetup = (app: Express): void => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 };
 
+const MONGO_URL = process.env.MONGO_URL;
+const PORT = Number(process.env.PORT) || 3001;
+
+if (!MONGO_URL) {
+  console.error(
+    '❌ Variável MONGO_URL não definida. Copie api/.env.example para api/.env e preencha a connection string.'
+  );
+  process.exit(1);
+}
+
 mongoose
-  .connect(
-    'mongodb+srv://wawaagp:Es9r2BmlRRlyewcI@waiterapp.n08ezge.mongodb.net'
-  )
+  .connect(MONGO_URL)
   .then(() => {
     const app = express();
-    const port = 3001;
 
     setupSwagger(app);
 
@@ -39,8 +47,11 @@ mongoose
     app.use(express.json());
     app.use(router);
 
-    app.listen(port, () => {
-      console.log(`🔥 Server is running on http://localhost:${port}`);
+    app.listen(PORT, () => {
+      console.log(`🔥 Server is running on http://localhost:${PORT}`);
     });
   })
-  .catch(() => console.log('Erro ao conectar ao mongo'));
+  .catch((error) => {
+    console.error('Erro ao conectar ao MongoDB:', error);
+    process.exit(1);
+  });
