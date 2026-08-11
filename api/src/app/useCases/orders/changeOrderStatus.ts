@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Server } from 'socket.io';
 
 import { Order } from '../../models/Order';
 
@@ -14,6 +15,9 @@ export async function changeOrderStatus(req: Request, res: Response) {
     }
 
     await Order.findByIdAndUpdate(orderId, { status });
+
+    const io = req.app.get('io') as Server | undefined;
+    io?.emit('orders@statusChange', { orderId, status });
 
     res.sendStatus(204);
   } catch(error) {

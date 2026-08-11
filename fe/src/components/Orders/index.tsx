@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 import { Order } from "../../types/Order";
 
 import { OrdersBoard } from "../OrdersBoard";
 
 import { Container } from "./styles";
-import { api } from "../../utils/api";
+import { api, API_URL } from "../../utils/api";
 
 export function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -15,6 +16,37 @@ export function Orders() {
       .then(({ data }) => {
         setOrders(data);
       })
+  }, []);
+
+  useEffect(() => {
+    const socket = io(API_URL, {
+      transports: ['websocket'],
+    });
+
+    socket.on('orders@new', (order: Order) => {
+      setOrders((prevState) => [...prevState, order]);
+    });
+
+    socket.on(
+      'orders@statusChange',
+      ({ orderId, status }: { orderId: string; status: Order['status'] }) => {
+        setOrders((prevState) =>
+          prevState.map((order) =>
+            order._id === orderId ? { ...order, status } : order
+          )
+        );
+      }
+    );
+
+    socket.on('orders@cancel', (orderId: string) => {
+      setOrders((prevState) =>
+        prevState.filter((order) => order._id !== orderId)
+      );
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const waiting = orders.filter((order) => order.status === 'WAITING')

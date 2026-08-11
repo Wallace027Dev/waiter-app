@@ -1,8 +1,10 @@
 import 'dotenv/config';
+import http from 'node:http';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'node:path';
 import swaggerUi from 'swagger-ui-express';
+import { Server } from 'socket.io';
 import swaggerDocument from './swagger.json';
 
 import { router } from './router';
@@ -30,6 +32,11 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     const app = express();
+    const server = http.createServer(app);
+    const io = new Server(server, { cors: { origin: '*' } });
+
+    // Disponibiliza o io para os handlers via req.app.get('io')
+    app.set('io', io);
 
     setupSwagger(app);
 
@@ -47,7 +54,7 @@ mongoose
     app.use(express.json());
     app.use(router);
 
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`🔥 Server is running on http://localhost:${PORT}`);
     });
   })
