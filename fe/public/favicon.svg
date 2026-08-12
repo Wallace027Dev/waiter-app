@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7" fill="#D73035"/>
+  <!-- botão do cloche -->
+  <circle cx="16" cy="9" r="1.7" fill="#ffffff"/>
+  <!-- cúpula (cloche de servir) -->
+  <path d="M5.5 21a10.5 10.5 0 0 1 21 0Z" fill="#ffffff"/>
+  <!-- base / prato -->
+  <rect x="4" y="21.4" width="24" height="2.8" rx="1.4" fill="#ffffff"/>
+</svg>
