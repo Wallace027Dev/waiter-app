@@ -1,22 +1,9 @@
 import 'dotenv/config';
 import http from 'node:http';
-import express from 'express';
 import mongoose from 'mongoose';
-import path from 'node:path';
-import swaggerUi from 'swagger-ui-express';
 import { Server } from 'socket.io';
-import swaggerDocument from './swagger.json';
 
-import { router } from './router';
-import { Express } from 'express';
-
-interface SwaggerSetup {
-  (app: Express): void;
-}
-
-const setupSwagger: SwaggerSetup = (app: Express): void => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-};
+import { createApp } from './app';
 
 const MONGO_URL = process.env.MONGO_URL;
 const PORT = Number(process.env.PORT) || 3001;
@@ -31,28 +18,12 @@ if (!MONGO_URL) {
 mongoose
   .connect(MONGO_URL)
   .then(() => {
-    const app = express();
+    const app = createApp();
     const server = http.createServer(app);
     const io = new Server(server, { cors: { origin: '*' } });
 
     // Disponibiliza o io para os handlers via req.app.get('io')
     app.set('io', io);
-
-    setupSwagger(app);
-
-    app.use((_req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', '*');
-      res.setHeader('Access-Control-Allow-Headers', '*');
-
-      next();
-    });
-    app.use(
-      '/uploads',
-      express.static(path.resolve(__dirname, '..', 'uploads'))
-    );
-    app.use(express.json());
-    app.use(router);
 
     server.listen(PORT, () => {
       console.log(`🔥 Server is running on http://localhost:${PORT}`);
